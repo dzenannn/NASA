@@ -13,4 +13,4 @@
 <br />
 Vue Docs -> https://vuejs.org/guide/introduction.html
 <br />
-Vue CLI Docs -> https://cli.vuejs.org/
+Vue CLI -> https://cli.vuejs.org/
