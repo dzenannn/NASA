@@ -1,5 +1,5 @@
 # nasa app
-[//]: # (Not finished)
+
 ### Project setup
 
 > npm install
