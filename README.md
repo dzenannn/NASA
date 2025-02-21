@@ -1,11 +1,11 @@
 # nasa app
-
-## Project setup
+[//]: # (Not finished)
+### Project setup
 
 > npm install
 
 
-## Project run
+### Project run
 
 > npm run serve
 
