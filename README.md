@@ -1,24 +1,14 @@
-# nasa-app
+# nasa app
 
 ## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+> npm install
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Project run
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+> npm run serve
+
+
+[Vue Docs] (https://vuejs.org/guide/introduction.html)
+[Vue CLI Docs] (https://cli.vuejs.org/)
