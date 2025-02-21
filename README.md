@@ -1,4 +1,4 @@
-# nasa app :rocket:
+# NASA App :rocket:
 
 ### Project setup
 
