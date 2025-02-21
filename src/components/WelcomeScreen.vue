@@ -1,6 +1,6 @@
 <template>
   <div class="welcomeImg">
-    <img :src="welcomeData.hdurl" alt="" />
+    <img :src="welcomeData.hdurl" />
   </div>
   <div class="title">{{ welcomeData.title }}</div>
   <div class="text">{{ welcomeData.explanation }}</div>
@@ -50,7 +50,7 @@ export default {
   font-size: 32px;
   position: absolute;
   top: 20px;
-  left: 25%;
+  left: 15%;
   font-weight: 500;
   color: #fff;
 }
@@ -58,10 +58,11 @@ export default {
 .text {
   font-size: 20px;
   position: absolute;
-  top: 50px;
-  left: 25%;
+  top: 60px;
+  left: 15%;
   font-weight: 400;
   color: #fff;
+  width: 65vw;
 
   letter-spacing: 2px;
 }

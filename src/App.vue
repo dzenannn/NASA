@@ -1,15 +1,27 @@
 <template>
   <div>
-    <WelcomeScreen />
+    <WelcomeScreen v-if="showWelcome" />
+    <ListWrapper v-if="!showWelcome" />
   </div>
 </template>
 
 <script>
+import ListWrapper from './components/ListWrapper.vue';
 import WelcomeScreen from './components/WelcomeScreen.vue';
 
 export default {
   name: 'App',
-  components: { WelcomeScreen },
+  components: { WelcomeScreen, ListWrapper },
+  data() {
+    return {
+      showWelcome: true,
+    };
+  },
+  created() {
+    setTimeout(() => {
+      this.showWelcome = false;
+    }, 4000);
+  },
 };
 </script>
 
