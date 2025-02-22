@@ -4,26 +4,39 @@
       <input type="text" autofocus v-model="query" />
     </div>
     <div class="listWrapper">
-      <div v-for="item in data" :key="item">1</div>
+      <div v-for="item in data" :key="item">
+        <ListItem :item="item" />
+      </div>
     </div>
-    <div class="noData" v-if="data.length === 0 && loading === false">
+    <div class="noData" v-if="data.length === 0 && !loading && hasSearched">
       Sorry, data could not be found
+    </div>
+    <div class="loadingSpinner" v-if="loading">
+      <LoadingSpinner />
     </div>
   </div>
 </template>
 
 <script>
+import ListItem from './ListItem.vue';
+import LoadingSpinner from './LoadingSpinner.vue';
+
 export default {
   name: 'ListWrapper',
+  components: { LoadingSpinner, ListItem },
   methods: {
-    fetchData(query) {
+    fetchData() {
       this.loading = true;
-      fetch(`https://images-api.nasa.gov/search?q=` + query)
+      fetch('https://images-api.nasa.gov/search?q=' + this.query)
         .then((res) => res.json())
         .then((data) => {
           this.loading = false;
+          this.hasSearched = true;
+          const filteredItems = data.collection.items.filter(
+            (item) => item.links && item.links.length > 0 && item.links[0].href
+          );
           console.log(data);
-          this.data = data.collection.items;
+          this.data = filteredItems;
         });
     },
   },
@@ -32,6 +45,7 @@ export default {
       query: '',
       data: [],
       loading: false,
+      hasSearched: false,
     };
   },
   watch: {
@@ -41,6 +55,7 @@ export default {
         this.fetchData();
       } else {
         this.data = [];
+        this.hasSearched = false;
       }
     },
   },
@@ -53,7 +68,7 @@ export default {
   display: flex;
   justify-content: center;
   position: relative;
-  top: 8vh;
+  top: 5vh;
   margin-bottom: 35px;
 }
 
@@ -70,8 +85,10 @@ export default {
 .listWrapper {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 18px;
   flex-wrap: wrap;
+  margin-top: 15vh;
+  padding-inline: 20px;
 }
 
 .noData {
@@ -79,5 +96,13 @@ export default {
   width: 100%;
   color: #fff;
   font-size: 32px;
+}
+
+.loadingSpinner {
+  text-align: center;
+  width: 100%;
+  color: #fff;
+  font-size: 32px;
+  margin-top: 5vh;
 }
 </style>
