@@ -5,11 +5,7 @@
       <h4>{{ shrinkTitle(item.data[0].title) }}</h4>
       <p>{{ shrinkDescription(item.data[0].description) }}</p>
       <div class="tags">
-        <div
-          class="tagItem"
-          v-for="keyword in item.data[0].keywords"
-          :key="keyword"
-        >
+        <div class="tagItem" v-for="keyword in getKeywords" :key="keyword">
           Tags: {{ keyword }}
         </div>
       </div>
@@ -26,8 +22,15 @@ export default {
       imageExists: true,
     };
   },
+  computed: {
+    getKeywords() {
+      return this.item?.data[0]?.keywords?.slice(0, 2) || [];
+    },
+  },
   methods: {
-    handleImageError: () => (this.imageExists = false),
+    handleImageError() {
+      this.imageExists = false;
+    },
     shrinkDescription: (desc) => desc.slice(0, 75) + '...',
     shrinkTitle: (title) => title.slice(0, 50) + '...',
   },
@@ -69,6 +72,12 @@ export default {
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
+}
+
+.tagItem {
+  font-size: 0.75rem;
+  text-decoration: underline;
 }
 </style>
