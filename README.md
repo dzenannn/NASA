@@ -9,26 +9,26 @@
 > npm run serve
 <br />
 🎯To-do functionalities:
-
-• Media type filter (photo/video)
-• Date-based sorting
-• Year Filter
-• Tags-based Search
-• Single item modal (description, metadata, download img option)
-• Favorite images
-• Share Button (share on social media)
-• Infinite Scroll
-• NASA News Feed
-
-🚀Performances, accessibilities, animations
-
-• Lazy-loading images
-• Skeleton loading state
-• Dark/Light theme
-• Card loading animations
-• Offline functionality
-• Multi-language Support
-• Localized date and time
+<br />
+• Media type filter (photo/video)<br />
+• Date-based sorting<br />
+• Year Filter<br />
+• Tags-based Search<br />
+• Single item modal (description, metadata, download img option)<br />
+• Favorite images<br />
+• Share Button (share on social media)<br />
+• Infinite Scroll<br />
+• NASA News Feed<br />
+<br /><br />
+🚀Performances, accessibilities, animations<br />
+<br />
+• Lazy-loading images<br />
+• Skeleton loading state<br />
+• Dark/Light theme<br />
+• Card loading animations<br />
+• Offline functionality<br />
+• Multi-language Support<br />
+• Localized date and time<br />
 
 <br/>
 Vue Docs -> https://vuejs.org/guide/introduction.html
