@@ -1,6 +1,9 @@
 <template>
   <div>
     <div class="inputWrapper">
+      <img
+        src="https://cdn.freebiesupply.com/logos/large/2x/nasa-1-logo-png-transparent.png"
+      />
       <input type="text" autofocus v-model="query" />
     </div>
     <div class="listWrapper">
@@ -69,6 +72,13 @@ export default {
   position: relative;
   top: 5vh;
   margin-bottom: 35px;
+  gap: 10px;
+}
+
+.inputWrapper img {
+  height: 90px;
+  position: relative;
+  bottom: 15px;
 }
 
 .inputWrapper input {
@@ -79,6 +89,7 @@ export default {
   border: none;
   outline: none;
   border-radius: 10px;
+  background-color: #f5f5e9;
 }
 
 .listWrapper {

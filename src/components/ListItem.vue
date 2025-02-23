@@ -40,13 +40,13 @@ export default {
 <style scoped>
 .card {
   border: 1px solid black;
-  box-shadow: 1px 3px 3px 1px;
+  box-shadow: 0 0 9px 1px;
   width: 250px;
   min-height: 350px;
   border-radius: 10px;
   transition-duration: 0.3s;
   cursor: pointer;
-  background-color: beige;
+  background-color: #f5f5e9;
 }
 
 .card img {
