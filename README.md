@@ -1,4 +1,4 @@
-# NASA App :rocket:
+#✨ NASA App ✨
 
 ### Project setup
 
@@ -19,8 +19,8 @@
 • Share Button (share on social media)<br />
 • Infinite Scroll<br />
 • NASA News Feed<br />
-<br /><br />
-🚀Performances, accessibilities, animations<br />
+<br />
+🚀Performances, accessibilities, animations:<br />
 <br />
 • Lazy-loading images<br />
 • Skeleton loading state<br />
@@ -34,3 +34,5 @@
 Vue Docs -> https://vuejs.org/guide/introduction.html
 <br />
 Vue CLI -> https://cli.vuejs.org/
+<br />
+NASA API -> https://api.nasa.gov/
