@@ -8,7 +8,7 @@
 
 > npm run serve
 <br />
-🎯To-do functionalities:
+🎯To-do functionalities:<br />
 <br />
 • Media type filter (photo/video)<br />
 • Date-based sorting<br />
