@@ -35,7 +35,6 @@ export default {
           const filteredItems = data.collection.items.filter(
             (item) => item.links && item.links.length > 0 && item.links[0].href
           );
-          console.log(data);
           this.data = filteredItems;
         });
     },

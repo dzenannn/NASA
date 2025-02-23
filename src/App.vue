@@ -53,11 +53,12 @@ body::-webkit-scrollbar-thumb {
 }
 
 body {
+  background: url('./assets/bgr.png') repeat;
   --sb-track-color: #232e33;
   --sb-thumb-color: #3b5bcc;
   --sb-size: 22px;
   margin-bottom: 40px;
   box-sizing: border-box;
-  background-color: #0b3d91;
+  color: #000000;
 }
 </style>

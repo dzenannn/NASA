@@ -46,6 +46,7 @@ export default {
   border-radius: 10px;
   transition-duration: 0.3s;
   cursor: pointer;
+  background-color: beige;
 }
 
 .card img {
