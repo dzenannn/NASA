@@ -4,7 +4,12 @@
       <img
         src="https://cdn.freebiesupply.com/logos/large/2x/nasa-1-logo-png-transparent.png"
       />
-      <input type="text" autofocus v-model="query" />
+      <input
+        type="text"
+        autofocus
+        placeholder="Search NASA scientific articles or celestial bodies..."
+        v-model="query"
+      />
     </div>
     <div class="listWrapper">
       <div v-for="item in data" :key="item">
