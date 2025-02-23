@@ -1,4 +1,4 @@
-#✨ NASA App ✨
+# ✨ NASA App ✨
 
 ### Project setup
 
