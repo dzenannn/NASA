@@ -13,26 +13,39 @@
     </div>
     <div class="listWrapper">
       <div v-for="item in data" :key="item">
-        <ListItem :item="item" />
+        <ListItem :item="item" @click="openModal(item)" />
       </div>
+      <ItemModal
+        :show="showModal"
+        :item="selectedItem"
+        @close="closeModal"
+        v-if="selectedItem"
+      />
     </div>
     <div class="noData" v-if="data.length === 0 && !loading && hasSearched">
       Sorry, data could not be found
     </div>
-    <div class="loadingSpinner" v-if="loading">
-      <LoadingSpinner />
-    </div>
+    <div class="loadingSpinner" v-if="loading"><LoadingSpinner /></div>
   </div>
 </template>
 
 <script>
+import ItemModal from './ItemModal.vue';
 import ListItem from './ListItem.vue';
 import LoadingSpinner from './LoadingSpinner.vue';
 
 export default {
   name: 'ListWrapper',
-  components: { LoadingSpinner, ListItem },
+  components: { LoadingSpinner, ListItem, ItemModal },
   methods: {
+    openModal(item) {
+      this.selectedItem = item;
+      this.showModal = true;
+    },
+    closeModal() {
+      this.showModal = false;
+      this.selectedItem = null;
+    },
     fetchData() {
       this.loading = true;
       fetch('https://images-api.nasa.gov/search?q=' + this.query)
@@ -44,6 +57,7 @@ export default {
             (item) => item.links && item.links.length > 0 && item.links[0].href
           );
           this.data = filteredItems;
+          console.log(filteredItems);
         });
     },
   },
@@ -53,6 +67,8 @@ export default {
       data: [],
       loading: false,
       hasSearched: false,
+      showModal: false,
+      selectedItem: null,
     };
   },
   watch: {

@@ -64,4 +64,9 @@ body {
   color: #000000;
   /*  */
 }
+
+body .modal-open {
+  overflow: hidden;
+  padding-right: var(--sb-size);
+}
 </style>
