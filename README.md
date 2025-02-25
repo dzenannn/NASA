@@ -25,10 +25,12 @@
 > • Card loading animations<br />
 > • Offline functionality<br />
 > • Multi-language Support<br />
-> • Localized date and time<br /> > <br/>
+> • Localized date and time<br />
+> <br/>
 
 > Functionalities completed: Single item modal ✅
-> <br/> > <br/>
+> <br/>
+> <br/>
 > Vue Docs -> https://vuejs.org/guide/introduction.html > <br />
 > Vue CLI -> https://cli.vuejs.org/ > <br />
 > NASA API -> https://api.nasa.gov/
