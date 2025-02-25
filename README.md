@@ -8,7 +8,8 @@
 
 > npm run serve
  <br />
- 🎯To-do functionalities:<br /> > <br />
+ 🎯To-do functionalities:<br />
+ <br />
  • Media type filter (photo/video)<br />
  • Date-based sorting<br />
  • Year Filter<br />
@@ -17,7 +18,8 @@
  • Favorite images<br />
  • Share Button (share on social media)<br />
  • Infinite Scroll<br />
- • NASA News Feed<br /> > <br />
+ • NASA News Feed<br />
+ <br />
  🚀Performances, accessibilities, animations:<br /> > <br />
  • Lazy-loading images<br />
  • Skeleton loading state<br />
@@ -30,6 +32,6 @@
  Functionalities completed: Single item modal ✅
  <br/>
  <br/>
-> Vue Docs -> https://vuejs.org/guide/introduction.html > <br />
-> Vue CLI -> https://cli.vuejs.org/ > <br />
+> Vue Docs -> https://vuejs.org/guide/introduction.html <br />
+> Vue CLI -> https://cli.vuejs.org/ <br />
 > NASA API -> https://api.nasa.gov/
