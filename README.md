@@ -20,7 +20,8 @@
  • Infinite Scroll<br />
  • NASA News Feed<br />
  <br />
- 🚀Performances, accessibilities, animations:<br /> > <br />
+ 🚀Performances, accessibilities, animations:<br />
+<br />
  • Lazy-loading images<br />
  • Skeleton loading state<br />
  • Dark/Light theme<br />
