@@ -19,6 +19,18 @@
           <p>
             Date: {{ new Date(item.data[0].date_created).toLocaleDateString() }}
           </p>
+          <button class="download-button" @click="downloadImage">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+            >
+              <path fill="currentColor" d="M4 22v-2h16v2zm8-4L5 9h4V2h6v7h4z" />
+            </svg>
+            image
+          </button>
+          <p v-if="downloadMessage">{{ downloadMessage }}</p>
         </div>
       </div>
     </div>
@@ -31,6 +43,11 @@ export default {
   props: {
     show: Boolean,
     item: Object,
+  },
+  data() {
+    return {
+      downloadMessage: null,
+    };
   },
   watch: {
     show(newValue) {
@@ -52,6 +69,15 @@ export default {
     closeModal() {
       document.body.classList.remove('modal-open');
       this.$emit('close');
+    },
+    downloadImage() {
+      const link = document.createElement('a');
+      link.href = this.item.links[0].href;
+      link.target = '_blank';
+      link.download = `${this.item.data[0].title || 'nasa-image'}.jpg`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     },
   },
   beforeUnmount() {
@@ -124,5 +150,23 @@ export default {
 .metadata {
   margin-top: 20px;
   color: #666;
+}
+
+.download-button {
+  background-color: #57579e;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.download-button:hover {
+  background-color: #444477;
 }
 </style>
