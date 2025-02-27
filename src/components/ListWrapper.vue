@@ -12,16 +12,16 @@
       />
     </div>
     <div class="listWrapper">
-      <div v-for="item in data" :key="item">
+      <div class="item-container" v-for="item in data" :key="item">
         <ListItem :item="item" @click="openModal(item)" />
       </div>
-      <ItemModal
-        :show="showModal"
-        :item="selectedItem"
-        @close="closeModal"
-        v-if="selectedItem"
-      />
     </div>
+    <ItemModal
+      :show="showModal"
+      :item="selectedItem"
+      @close="closeModal"
+      v-if="selectedItem"
+    />
     <div class="noData" v-if="data.length === 0 && !loading && hasSearched">
       Sorry, data could not be found
     </div>
@@ -190,6 +190,10 @@ export default {
   flex-wrap: wrap;
   margin-top: 15vh;
   padding-inline: 20px;
+}
+
+.item-container {
+  display: contents;
 }
 
 .noData {
