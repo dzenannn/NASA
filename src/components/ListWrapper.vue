@@ -89,7 +89,6 @@ export default {
       }
     },
     observeLastElement() {
-      // Pronalaženje i posmatranje poslednjeg elementa
       const lastItem = this.$el.querySelector('.listWrapper > div:last-child');
       if (lastItem) {
         this.observer.observe(lastItem);
