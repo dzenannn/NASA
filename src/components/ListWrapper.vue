@@ -25,7 +25,12 @@
     <div class="noData" v-if="data.length === 0 && !loading && hasSearched">
       Sorry, data could not be found
     </div>
-    <div class="loadingSpinner" v-if="loading"><LoadingSpinner /></div>
+    <div class="loadingSpinner" v-if="loading">
+      <LoadingSpinner />
+    </div>
+    <div v-if="hasMore && !loading && data.length > 0" class="loadMore">
+      Scroll for more results...
+    </div>
   </div>
 </template>
 
@@ -35,8 +40,33 @@ import ListItem from './ListItem.vue';
 import LoadingSpinner from './LoadingSpinner.vue';
 
 export default {
+  /* eslint-disable */
   name: 'ListWrapper',
   components: { LoadingSpinner, ListItem, ItemModal },
+  data() {
+    return {
+      query: '',
+      data: [],
+      loading: false,
+      hasSearched: false,
+      showModal: false,
+      selectedItem: null,
+      page: 1,
+      hasMore: true,
+    };
+  },
+  mounted() {
+    this.observer = new IntersectionObserver(this.handleIntersect, {
+      root: null,
+      rootMargin: '20px',
+      threshold: 0.5,
+    });
+  },
+  unmounted() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  },
   methods: {
     openModal(item) {
       this.selectedItem = item;
@@ -46,39 +76,71 @@ export default {
       this.showModal = false;
       this.selectedItem = null;
     },
-    fetchData() {
+    handleIntersect(entries) {
+      const entry = entries[0];
+      if (
+        entry.isIntersecting &&
+        this.hasMore &&
+        !this.loading &&
+        this.query.length > 2
+      ) {
+        this.page++;
+        this.fetchData(false);
+      }
+    },
+    observeLastElement() {
+      // Pronalaženje i posmatranje poslednjeg elementa
+      const lastItem = this.$el.querySelector('.listWrapper > div:last-child');
+      if (lastItem) {
+        this.observer.observe(lastItem);
+      }
+    },
+    async fetchData(resetData = true) {
+      if (resetData) {
+        this.page = 1;
+        this.hasMore = true;
+        this.data = [];
+      }
+
       this.loading = true;
-      fetch('https://images-api.nasa.gov/search?q=' + this.query)
-        .then((res) => res.json())
-        .then((data) => {
-          this.loading = false;
-          this.hasSearched = true;
-          const filteredItems = data.collection.items.filter(
-            (item) => item.links && item.links.length > 0 && item.links[0].href
-          );
+      try {
+        const response = await fetch(
+          `https://images-api.nasa.gov/search?q=${this.query}&page=${this.page}`
+        );
+        const data = await response.json();
+
+        const filteredItems = data.collection.items.filter(
+          (item) => item.links && item.links.length > 0 && item.links[0].href
+        );
+
+        if (resetData) {
           this.data = filteredItems;
-          console.log(filteredItems);
+        } else {
+          this.data = [...this.data, ...filteredItems];
+        }
+
+        this.hasMore = filteredItems.length > 0;
+        this.hasSearched = true;
+
+        this.$nextTick(() => {
+          this.observeLastElement();
         });
+      } catch (error) {
+        console.error('Error while gathering data:', error);
+      } finally {
+        this.loading = false;
+      }
     },
   },
-  data() {
-    return {
-      query: '',
-      data: [],
-      loading: false,
-      hasSearched: false,
-      showModal: false,
-      selectedItem: null,
-    };
-  },
   watch: {
-    // eslint-disable-next-line
     query(newVal, oldVal) {
       if (newVal.length > 2) {
-        this.fetchData();
+        this.fetchData(true);
       } else {
         this.data = [];
         this.hasSearched = false;
+        this.page = 1;
+        this.hasMore = true;
       }
     },
   },
@@ -86,6 +148,14 @@ export default {
 </script>
 
 <style scoped>
+.loadMore {
+  text-align: center;
+  color: #fff;
+  padding: 20px;
+  font-size: 16px;
+  opacity: 0.8;
+}
+
 .inputWrapper {
   width: 100%;
   display: flex;
