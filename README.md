@@ -17,7 +17,6 @@
  • Single item modal (description, metadata, download img option)<br />
  • Favorite images<br />
  • Share Button (share on social media)<br />
- • Infinite Scroll<br />
  • NASA News Feed<br />
  <br />
  🚀Performances, accessibilities, animations:<br />
