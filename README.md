@@ -14,7 +14,6 @@
  • Date-based sorting<br />
  • Year Filter<br />
  • Tags-based Search<br />
- • Single item modal (description, metadata, download img option)<br />
  • Favorite images<br />
  • Share Button (share on social media)<br />
  • NASA News Feed<br />
