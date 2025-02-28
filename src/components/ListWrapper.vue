@@ -15,6 +15,7 @@
       <div class="item-container" v-for="item in data" :key="item">
         <ListItem :item="item" @click="openModal(item)" />
       </div>
+      <div class="scroll-observer" v-if="hasMore && !loading"></div>
     </div>
     <ItemModal
       :show="showModal"
@@ -58,8 +59,8 @@ export default {
   mounted() {
     this.observer = new IntersectionObserver(this.handleIntersect, {
       root: null,
-      rootMargin: '20px',
-      threshold: 0.5,
+      rootMargin: '50px',
+      threshold: 0.1,
     });
   },
   unmounted() {
@@ -89,16 +90,27 @@ export default {
       }
     },
     observeLastElement() {
-      const lastItem = this.$el.querySelector('.listWrapper > div:last-child');
-      if (lastItem) {
-        this.observer.observe(lastItem);
+      if (this.observer) {
+        this.observer.disconnect();
       }
+
+      this.$nextTick(() => {
+        const observerElement = this.$el.querySelector('.scroll-observer');
+        if (observerElement && this.hasMore) {
+          this.observer.observe(observerElement);
+        }
+      });
     },
+
     async fetchData(resetData = true) {
       if (resetData) {
         this.page = 1;
         this.hasMore = true;
         this.data = [];
+      }
+
+      if (!this.query || this.query.length <= 2) {
+        return;
       }
 
       this.loading = true;
@@ -208,5 +220,10 @@ export default {
   color: #fff;
   font-size: 32px;
   margin-top: 5vh;
+}
+
+.scroll-observer {
+  width: 100%;
+  height: 20px;
 }
 </style>
