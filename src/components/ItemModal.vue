@@ -19,7 +19,7 @@
           <p>
             Date: {{ new Date(item.data[0].date_created).toLocaleDateString() }}
           </p>
-          <button class="download-button" @click="downloadImage">
+          <purpleButton @click="downloadImage" :text="'image'">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="13"
@@ -28,8 +28,7 @@
             >
               <path fill="currentColor" d="M4 22v-2h16v2zm8-4L5 9h4V2h6v7h4z" />
             </svg>
-            image
-          </button>
+          </purpleButton>
           <p v-if="downloadMessage">{{ downloadMessage }}</p>
         </div>
       </div>

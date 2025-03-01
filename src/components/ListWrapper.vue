@@ -11,6 +11,16 @@
         v-model="query"
       />
     </div>
+    <div v-if="timesSearched && query" class="cta">
+      <purpleButton @click="toggleSort">
+        Sort by date {{ sortOrder === 'desc' ? '↑' : '↓' }}
+      </purpleButton>
+      <input
+        type="text"
+        v-model="year"
+        placeholder="Enter year to filter items..."
+      />
+    </div>
     <div class="listWrapper">
       <div class="item-container" v-for="item in data" :key="item">
         <ListItem :item="item" @click="openModal(item)" />
@@ -48,12 +58,16 @@ export default {
     return {
       query: '',
       data: [],
+      originalData: [],
       loading: false,
       hasSearched: false,
       showModal: false,
       selectedItem: null,
       page: 1,
       hasMore: true,
+      sortOrder: 'desc',
+      year: '',
+      timesSearched: 0,
     };
   },
   mounted() {
@@ -69,6 +83,15 @@ export default {
     }
   },
   methods: {
+    applyYearFilter() {
+      if (this.year.length === 4 && this.originalData.length > 0) {
+        this.data = this.originalData.filter((item) =>
+          item.data[0].date_created.includes(this.year)
+        );
+      } else {
+        this.data = [...this.originalData];
+      }
+    },
     openModal(item) {
       this.selectedItem = item;
       this.showModal = true;
@@ -76,6 +99,22 @@ export default {
     closeModal() {
       this.showModal = false;
       this.selectedItem = null;
+    },
+    toggleSort() {
+      this.sortOrder = this.sortOrder === 'desc' ? 'asc' : 'desc';
+      this.sortByDate();
+    },
+    sortByDate() {
+      if (this.data.length === 0) return;
+
+      this.data.sort((a, b) => {
+        const $firstDate = new Date(a.data[0].date_created);
+        const $secondDate = new Date(b.data[0].date_created);
+
+        return this.sortOrder === 'desc'
+          ? $secondDate - $firstDate
+          : $firstDate - $secondDate;
+      });
     },
     handleIntersect(entries) {
       const entry = entries[0];
@@ -107,6 +146,7 @@ export default {
         this.page = 1;
         this.hasMore = true;
         this.data = [];
+        this.originalData = [];
       }
 
       if (!this.query || this.query.length <= 2) {
@@ -124,14 +164,26 @@ export default {
           (item) => item.links && item.links.length > 0 && item.links[0].href
         );
 
+        filteredItems.map((item) => {
+          if (item.data && item.data[0] && item.data[0].date_created) {
+            item.data[0].date_created = new Date(
+              item.data[0].date_created
+            ).toLocaleDateString();
+          }
+        });
+
         if (resetData) {
+          this.originalData = filteredItems;
           this.data = filteredItems;
         } else {
+          this.originalData = [...this.originalData, ...filteredItems];
           this.data = [...this.data, ...filteredItems];
         }
 
         this.hasMore = filteredItems.length > 0;
         this.hasSearched = true;
+
+        this.applyYearFilter();
 
         this.$nextTick(() => {
           this.observeLastElement();
@@ -147,12 +199,17 @@ export default {
     query(newVal, oldVal) {
       if (newVal.length > 2) {
         this.fetchData(true);
+        this.timesSearched++;
       } else {
         this.data = [];
+        this.originalData = [];
         this.hasSearched = false;
         this.page = 1;
         this.hasMore = true;
       }
+    },
+    year(newVal, oldVal) {
+      this.applyYearFilter();
     },
   },
 };
@@ -225,5 +282,23 @@ export default {
 .scroll-observer {
   width: 100%;
   height: 20px;
+}
+
+.cta {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.cta input {
+  width: 10vw;
+  height: 20px;
+  display: flex;
+  padding: 4px 8px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  background-color: #f5f5e9;
 }
 </style>
