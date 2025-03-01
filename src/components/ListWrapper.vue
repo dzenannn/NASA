@@ -11,7 +11,7 @@
         v-model="query"
       />
     </div>
-    <div v-if="timesSearched && query" class="cta">
+    <div v-if="query" class="cta">
       <purpleButton @click="toggleSort">
         Sort by date {{ sortOrder === 'desc' ? '↑' : '↓' }}
       </purpleButton>
