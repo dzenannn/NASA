@@ -10,8 +10,24 @@
         placeholder="Search NASA scientific articles or celestial bodies..."
         v-model="query"
       />
+      <span v-if="query" id="clear" @click="clearInput">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill="none"
+            stroke="#000"
+            stroke-linejoin="round"
+            d="m7 6l4 4m0-4l-4 4M5 3.5h9.5v9H5L1.5 8z"
+            stroke-width="1"
+          />
+        </svg>
+      </span>
     </div>
-    <div v-if="query" class="cta">
+    <div v-if="query.length >= 3" class="cta">
       <purpleButton @click="toggleSort">
         Sort by date {{ sortOrder === 'desc' ? '↑' : '↓' }}
       </purpleButton>
@@ -30,7 +46,9 @@
     <ItemModal
       :show="showModal"
       :item="selectedItem"
+      :fav-images="favImages"
       @close="closeModal"
+      @add-to-favorites="addToFavorites"
       v-if="selectedItem"
     />
     <div class="noData" v-if="data.length === 0 && !loading && hasSearched">
@@ -42,6 +60,14 @@
     <div v-if="hasMore && !loading && data.length > 0" class="loadMore">
       Scroll for more results...
     </div>
+
+    <div class="favImages">
+      <FavoriteImages
+        :fav-images="favImages"
+        @remove-favorite="removeFromFavorites"
+        v-if="favImages.length > 0 && query === ''"
+      />
+    </div>
   </div>
 </template>
 
@@ -49,14 +75,15 @@
 import ItemModal from './ItemModal.vue';
 import ListItem from './ListItem.vue';
 import LoadingSpinner from './LoadingSpinner.vue';
+import FavoriteImages from './FavoriteImages.vue';
 
 export default {
   /* eslint-disable */
   name: 'ListWrapper',
-  components: { LoadingSpinner, ListItem, ItemModal },
+  components: { LoadingSpinner, ListItem, ItemModal, FavoriteImages },
   data() {
     return {
-      query: '',
+      query: 'sun',
       data: [],
       originalData: [],
       loading: false,
@@ -68,6 +95,7 @@ export default {
       sortOrder: 'desc',
       year: '',
       timesSearched: 0,
+      favImages: [],
     };
   },
   mounted() {
@@ -76,6 +104,16 @@ export default {
       rootMargin: '50px',
       threshold: 0.1,
     });
+
+    // Učitavanje favorita iz localStorage-a
+    const savedFavorites = localStorage.getItem('favImages');
+    if (savedFavorites) {
+      try {
+        this.favImages = JSON.parse(savedFavorites);
+      } catch (e) {
+        console.error('Error while loading favorites:', e);
+      }
+    }
   },
   unmounted() {
     if (this.observer) {
@@ -194,12 +232,30 @@ export default {
         this.loading = false;
       }
     },
+    addToFavorites(item) {
+      const exists = this.favImages.some(
+        (favItem) => favItem.data[0].nasa_id === item.data[0].nasa_id
+      );
+
+      if (!exists) {
+        this.favImages.push(item);
+
+        localStorage.setItem('favImages', JSON.stringify(this.favImages));
+      }
+    },
+    removeFromFavorites(index) {
+      this.favImages.splice(index, 1);
+
+      localStorage.setItem('favImages', JSON.stringify(this.favImages));
+    },
+    clearInput() {
+      this.query = '';
+    },
   },
   watch: {
     query(newVal, oldVal) {
       if (newVal.length > 2) {
         this.fetchData(true);
-        this.timesSearched++;
       } else {
         this.data = [];
         this.originalData = [];
@@ -228,16 +284,15 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
   position: relative;
-  top: 5vh;
-  margin-bottom: 35px;
+  top: 2.5vh;
+  margin-bottom: 20px;
   gap: 10px;
 }
 
 .inputWrapper img {
   height: 90px;
-  position: relative;
-  bottom: 15px;
 }
 
 .inputWrapper input {
@@ -256,8 +311,8 @@ export default {
   justify-content: center;
   gap: 18px;
   flex-wrap: wrap;
-  margin-top: 15vh;
-  padding-inline: 20px;
+  margin-top: 10vh;
+  padding-inline: 5px;
 }
 
 .item-container {
@@ -289,6 +344,7 @@ export default {
   gap: 15px;
   justify-content: center;
   align-items: center;
+  margin-top: 5vh;
 }
 
 .cta input {
@@ -300,5 +356,17 @@ export default {
   outline: none;
   border-radius: 10px;
   background-color: #f5f5e9;
+}
+
+.favImages {
+  margin-top: 5vh;
+  padding: 0 2vw;
+}
+
+#clear {
+  cursor: pointer;
+  position: relative;
+  right: 3vw;
+  top: 2px;
 }
 </style>

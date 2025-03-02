@@ -15,6 +15,7 @@ export default {
 .lds-ring,
 .lds-ring div {
   box-sizing: border-box;
+  margin-bottom: 30px;
 }
 .lds-ring {
   display: inline-block;

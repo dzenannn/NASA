@@ -1,6 +1,6 @@
 <template>
   <div v-if="show" class="modal-overlay" @click="closeModal">
-    <div class="modal-content" @click.stop>
+    <div ref="modalInfo" class="modal-content" @click.stop>
       <button class="close-button" @click="closeModal">&times;</button>
       <img :src="item.links[0].href" alt="item" class="modal-image" />
       <div class="modal-info">
@@ -19,17 +19,56 @@
           <p>
             Date: {{ new Date(item.data[0].date_created).toLocaleDateString() }}
           </p>
-          <purpleButton @click="downloadImage" :text="'image'">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="13"
-              height="13"
-              viewBox="0 0 24 24"
-            >
-              <path fill="currentColor" d="M4 22v-2h16v2zm8-4L5 9h4V2h6v7h4z" />
-            </svg>
-          </purpleButton>
-          <p v-if="downloadMessage">{{ downloadMessage }}</p>
+          <div class="buttons">
+            <purpleButton @click="downloadImage" :text="'image'">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M4 22v-2h16v2zm8-4L5 9h4V2h6v7h4z"
+                />
+              </svg>
+            </purpleButton>
+            <purpleButton @click="favoriteImage" :text="'image'">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+              >
+                <g fill="none">
+                  <path
+                    :fill="
+                      isInFavorites
+                        ? 'url(#fluentColorHeart240)'
+                        : 'currentColor'
+                    "
+                    d="m12.82 5.58l-.821.822l-.823-.823a5.375 5.375 0 0 0-7.602 7.601l7.896 7.896a.75.75 0 0 0 1.06 0l7.902-7.897a5.38 5.38 0 0 0-7.612-7.6"
+                  />
+                  <defs>
+                    <linearGradient
+                      id="fluentColorHeart240"
+                      x1="-2.376"
+                      x2="8.135"
+                      y1="-.938"
+                      y2="21.378"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop stop-color="#f97dbd" />
+                      <stop offset="1" stop-color="#f90000" />
+                    </linearGradient>
+                  </defs>
+                </g>
+              </svg>
+            </purpleButton>
+            <span v-if="downloadMessage">
+              {{ downloadMessage }}
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -42,6 +81,10 @@ export default {
   props: {
     show: Boolean,
     item: Object,
+    favImages: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -78,9 +121,28 @@ export default {
       link.click();
       document.body.removeChild(link);
     },
+    favoriteImage() {
+      if (this.isInFavorites) {
+        this.downloadMessage = 'Already in favorites!';
+      } else {
+        this.$emit('add-to-favorites', this.item);
+        this.downloadMessage = 'Added to favorites!';
+      }
+
+      setTimeout(() => {
+        this.downloadMessage = null;
+      }, 1800);
+    },
   },
   beforeUnmount() {
     document.body.classList.remove('modal-open');
+  },
+  computed: {
+    isInFavorites() {
+      return this.favImages.some(
+        (favItem) => favItem.data[0].nasa_id === this.item.data[0].nasa_id
+      );
+    },
   },
 };
 </script>
@@ -147,25 +209,22 @@ export default {
 }
 
 .metadata {
+  padding-bottom: 20px;
   margin-top: 20px;
   color: #666;
 }
 
-.download-button {
-  background-color: #57579e;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 13px;
-  transition: background-color 0.3s;
+.buttons {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
 }
 
-.download-button:hover {
-  background-color: #444477;
+.buttons button {
+  height: 3vh;
+}
+
+.buttons p {
+  height: 2vh;
 }
 </style>
