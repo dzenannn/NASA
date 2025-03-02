@@ -10,7 +10,6 @@
  <br />
  🎯To-do functionalities:<br />
  <br />
- • Media type filter (photo/video)<br />
  • Tags-based Search<br />
  • Favorite images<br />
  • Share Button (share on social media)<br />
