@@ -10,7 +10,11 @@
         :key="index"
         class="favorite-item"
       >
-        <img :src="item.links[0].href" :alt="item.data[0].title" />
+        <img
+          loading="lazy"
+          :src="item.links[0].href"
+          :alt="item.data[0].title"
+        />
         <div class="favorite-info">
           <h3>{{ item.data[0].title }}</h3>
           <button @click="removeFromFavorites(index)" class="remove-button">

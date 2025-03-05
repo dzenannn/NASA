@@ -3,6 +3,7 @@
     <div class="inputWrapper">
       <img
         src="https://cdn.freebiesupply.com/logos/large/2x/nasa-1-logo-png-transparent.png"
+        alt="image_of_the_day"
       />
       <input
         type="text"
@@ -60,7 +61,6 @@
     <div v-if="hasMore && !loading && data.length > 0" class="loadMore">
       Scroll for more results...
     </div>
-
     <div class="favImages">
       <FavoriteImages
         :fav-images="favImages"
@@ -83,7 +83,7 @@ export default {
   components: { LoadingSpinner, ListItem, ItemModal, FavoriteImages },
   data() {
     return {
-      query: 'sun',
+      query: '',
       data: [],
       originalData: [],
       loading: false,
@@ -348,7 +348,7 @@ export default {
 }
 
 .cta input {
-  width: 10vw;
+  width: 15%;
   height: 20px;
   display: flex;
   padding: 4px 8px;
@@ -366,7 +366,7 @@ export default {
 #clear {
   cursor: pointer;
   position: relative;
-  right: 3vw;
+  right: 2vw;
   top: 2px;
 }
 </style>
