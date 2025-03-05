@@ -1,6 +1,13 @@
 <template>
   <div class="card" v-if="imageExists">
-    <img :src="item.links[0].href" alt="" @error="handleImageError" />
+    <div>
+      <img
+        v-lazyLoading
+        :src="item?.links[0]?.href"
+        alt="item_img"
+        @error="handleImageError"
+      />
+    </div>
     <div class="container">
       <h4>{{ shrinkTitle(item.data[0].title) }}</h4>
       <p>{{ shrinkDescription(item.data[0].description) }}</p>
@@ -14,8 +21,11 @@
 </template>
 
 <script>
+import lazyLoading from '@/directives/lazyLoading';
+
 export default {
   name: 'ListItem',
+  directives: { lazyLoading },
   props: ['item'],
   data() {
     return {
@@ -31,8 +41,8 @@ export default {
     handleImageError() {
       this.imageExists = false;
     },
-    shrinkDescription: (desc) => desc.slice(0, 75) + '...',
-    shrinkTitle: (title) => title.slice(0, 50) + '...',
+    shrinkDescription: (desc) => (desc ? desc.slice(0, 75) + '...' : ''),
+    shrinkTitle: (title) => (title ? title.slice(0, 50) + '...' : ''),
   },
 };
 </script>

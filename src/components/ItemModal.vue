@@ -2,12 +2,7 @@
   <div v-if="show" class="modal-overlay" @click="closeModal">
     <div ref="modalInfo" class="modal-content" @click.stop>
       <button class="close-button" @click="closeModal">&times;</button>
-      <img
-        loading="lazy"
-        :src="item.links[0].href"
-        alt="item"
-        class="modal-image"
-      />
+      <img :src="item.links[0].href" alt="item" class="modal-image" />
       <div class="modal-info">
         <h2>{{ item.data[0].title }}</h2>
         <p>{{ formatText(item.data[0].description) }}</p>

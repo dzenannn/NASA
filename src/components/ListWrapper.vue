@@ -105,7 +105,6 @@ export default {
       threshold: 0.1,
     });
 
-    // Učitavanje favorita iz localStorage-a
     const savedFavorites = localStorage.getItem('favImages');
     if (savedFavorites) {
       try {
