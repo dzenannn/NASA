@@ -25,7 +25,7 @@
  • Multi-language Support<br />
  • Localized date and time<br />
  <br/>
- Functionalities completed: <br /> Single item modal ✅ <br /> Infinite scroll ✅ <br /> Date-based sorting ✅ <br /> Year Filter ✅
+ Functionalities completed: <br /> Single item modal ✅ <br /> Infinite scroll ✅ <br /> Date-based sorting ✅ <br /> Year Filter ✅ <br /> Lazy Loading ✅
  <br/>
  <br/>
  Vue Docs -> https://vuejs.org/guide/introduction.html <br />
