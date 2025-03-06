@@ -58,7 +58,7 @@ export default {
 .card img {
   width: 100%;
   height: 150px;
-  object-fit: fill;
+  object-fit: cover;
   border-radius: 10px;
 }
 
