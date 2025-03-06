@@ -2,8 +2,7 @@
   <div class="card" v-if="imageExists">
     <div>
       <img
-        v-lazyLoading
-        :src="item?.links[0]?.href"
+        v-lazy="item?.links[0]?.href"
         alt="item_img"
         @error="handleImageError"
       />
@@ -21,11 +20,8 @@
 </template>
 
 <script>
-import lazyLoading from '@/directives/lazyLoading';
-
 export default {
   name: 'ListItem',
-  directives: { lazyLoading },
   props: ['item'],
   data() {
     return {

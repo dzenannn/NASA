@@ -1,38 +1,29 @@
 export default {
-  mounted(el) {
+  mounted(el, binding) {
+    const options = {
+      root: null,
+      rootMargin: '0px 0px -10px 0px',
+      threshold: 0.1,
+    };
+
     function loadImage() {
-      const imageElement = Array.from(el.children).find(
-        (el) => el.nodeName === 'IMG'
-      );
+      const imageElement = el.tagName === 'IMG' ? el : el.querySelector('img');
 
       if (imageElement) {
-        imageElement.addEventListener('load', () =>
-          setTimeout(() => el.classList.add('loaded'), 100)
-        );
-        imageElement.addEventListener('error', () => console.log('error'));
-        imageElement.src = imageElement.dataset.url;
+        const imageSource = binding.value;
+
+        imageElement.src = imageSource;
       }
+
+      observer.unobserve(el);
     }
 
-    function handleIntersect(entries, observer) {
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          loadImage();
-          observer.unobserve(el);
-        }
+        if (entry.isIntersecting) loadImage();
       });
-    }
+    }, options);
 
-    function createObserver() {
-      const options = {
-        root: null,
-        threshold: 0,
-      };
-      const observer = new IntersectionObserver(handleIntersect, options);
-      observer.observe(el);
-    }
-
-    if (window['IntersectionObserver']) createObserver();
-    else loadImage();
+    observer.observe(el);
   },
 };
