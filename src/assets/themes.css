@@ -1,0 +1,19 @@
+:root {
+  --background-color: #57579e;
+  --text-color: #000;
+  --primary-color: #4c84ff;
+  --secondary-color: #f0f0f0;
+}
+
+html.dark {
+  --background-color: #121212;
+  --text-color: #000000;
+  --primary-color: #6e9fff;
+  --secondary-color: #2a2a2a;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
