@@ -58,6 +58,13 @@
     <div class="loadingSpinner" v-if="loading">
       <LoadingSpinner />
     </div>
+    <div v-if="loading" class="skeleton-loader">
+      <SkeletonLoader />
+      <SkeletonLoader />
+      <SkeletonLoader />
+      <SkeletonLoader />
+      <SkeletonLoader />
+    </div>
     <div v-if="hasMore && !loading && data.length > 0" class="loadMore">
       Scroll for more results...
     </div>
@@ -76,11 +83,18 @@ import ItemModal from './ItemModal.vue';
 import ListItem from './ListItem.vue';
 import LoadingSpinner from './LoadingSpinner.vue';
 import FavoriteImages from './FavoriteImages.vue';
+import SkeletonLoader from './SkeletonLoader.vue';
 
 export default {
   /* eslint-disable */
   name: 'ListWrapper',
-  components: { LoadingSpinner, ListItem, ItemModal, FavoriteImages },
+  components: {
+    LoadingSpinner,
+    ListItem,
+    ItemModal,
+    FavoriteImages,
+    SkeletonLoader,
+  },
   data() {
     return {
       query: '',
@@ -367,5 +381,11 @@ export default {
   position: relative;
   right: 2vw;
   top: 2px;
+}
+
+.skeleton-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
