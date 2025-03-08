@@ -4,14 +4,11 @@
   </button>
 </template>
 
-<script>
-import { useTheme } from '../../composables/useTheme';
+<script setup>
+import { useTheme } from '@/composables/useTheme';
 /* eslint-disable */
 const { theme, toggleTheme } = useTheme();
-
-export default {
-  name: 'ThemeToggle',
-};
+localStorage.setItem('theme', theme.value);
 </script>
 
 <style scoped>
