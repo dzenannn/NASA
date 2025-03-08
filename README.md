@@ -17,14 +17,12 @@
  <br />
  🚀Performances, accessibilities, animations:<br />
  <br />
- • Skeleton loading state<br />
- • Dark/Light theme<br />
  • Card loading animations<br />
  • Offline functionality<br />
  • Multi-language Support<br />
  • Localized date and time<br />
  <br/>
- Functionalities completed: <br /> Single item modal ✅ <br /> Infinite scroll ✅ <br /> Date-based sorting ✅ <br /> Year Filter ✅ <br /> Advanced Lazy Loading ✅
+ Functionalities completed: <br /> Single item modal ✅ <br /> Infinite scroll ✅ <br /> Date-based sorting ✅ <br /> Year Filter ✅ <br /> Advanced Lazy Loading ✅ <br /> Dark/Light Theme ✅ <br /> Skeleton loading state ✅
  <br/>
  <br/>
  Vue Docs -> https://vuejs.org/guide/introduction.html <br />
