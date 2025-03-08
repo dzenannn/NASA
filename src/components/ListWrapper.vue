@@ -379,7 +379,7 @@ export default {
 #clear {
   cursor: pointer;
   position: relative;
-  right: 2vw;
+  right: 3vw;
   top: 2px;
 }
 
