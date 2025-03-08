@@ -6,10 +6,10 @@
 }
 
 html.dark {
-  --background-color: #121212;
-  --text-color: #000000;
-  --primary-color: #6e9fff;
-  --secondary-color: #2a2a2a;
+  --background-color: #121212 !important;
+  --text-color: #000000 !important;
+  --primary-color: #6e9fff !important;
+  --secondary-color: #2a2a2a !important;
 }
 
 body {
