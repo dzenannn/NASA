@@ -114,6 +114,7 @@ export default {
       year: '',
       timesSearched: 0,
       favImages: [],
+      currentDate: new Date(),
     };
   },
   mounted() {

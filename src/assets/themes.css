@@ -12,6 +12,10 @@ html.dark {
   --secondary-color: #2a2a2a !important;
 }
 
+html.dark .user-preferences {
+  color: #f0f0f0;
+}
+
 body {
   background-color: var(--background-color);
   color: var(--text-color);

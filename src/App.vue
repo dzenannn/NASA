@@ -1,7 +1,10 @@
 <!-- npm run lint -- --fix -->
 <template>
   <div>
-    <ThemeToggle />
+    <div class="user-preferences">
+      <ThemeToggle />
+      <span id="lDate"><LocalizedDate /></span>
+    </div>
     <WelcomeScreen v-if="showWelcome" />
     <ListWrapper v-if="!showWelcome" />
   </div>
@@ -11,10 +14,11 @@
 import ListWrapper from './components/ListWrapper.vue';
 import WelcomeScreen from './components/WelcomeScreen.vue';
 import ThemeToggle from './components/ThemeToggle/ThemeToggle.vue';
+import LocalizedDate from './components/LocalizedDate/LocalizedDate.vue';
 
 export default {
   name: 'App',
-  components: { WelcomeScreen, ListWrapper, ThemeToggle },
+  components: { WelcomeScreen, ListWrapper, ThemeToggle, LocalizedDate },
   data() {
     return {
       showWelcome: true,
@@ -23,7 +27,7 @@ export default {
   created() {
     setTimeout(() => {
       this.showWelcome = false;
-    }, 4000);
+    }, 4500);
   },
 };
 </script>
@@ -75,5 +79,18 @@ body .modal-open {
   padding-right: var(--sb-size);
 }
 
+img {
+  user-select: none;
+}
+
+.user-preferences {
+  display: flex;
+  align-items: end;
+}
+
+#lDate {
+  position: absolute;
+  right: 2vw;
+}
 @import './assets/themes.css';
 </style>
