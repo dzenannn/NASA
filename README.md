@@ -20,9 +20,8 @@
  • Card loading animations<br />
  • Offline functionality<br />
  • Multi-language Support<br />
- • Localized date and time<br />
  <br/>
- Functionalities completed: <br /> Single item modal ✅ <br /> Infinite scroll ✅ <br /> Date-based sorting ✅ <br /> Year Filter ✅ <br /> Advanced Lazy Loading ✅ <br /> Dark/Light Theme ✅ <br /> Skeleton loading state ✅
+ Functionalities completed: <br /> Single item modal ✅ <br /> Infinite scroll ✅ <br /> Date-based sorting ✅ <br /> Year Filter ✅ <br /> Advanced Lazy Loading ✅ <br /> Dark/Light Theme ✅ <br /> Skeleton loading state ✅ <br /> Localized date and time ✅
  <br/>
  <br/>
  Vue Docs -> https://vuejs.org/guide/introduction.html <br />
