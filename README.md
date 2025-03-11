@@ -26,3 +26,6 @@
  Vue Docs -> https://vuejs.org/guide/introduction.html <br />
  Vue CLI -> https://cli.vuejs.org/ <br />
  NASA API -> https://api.nasa.gov/
+<br />
+<br />
+Used Libraries: Vue-I18n for Date and Time Localization 🟢
