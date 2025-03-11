@@ -81,9 +81,13 @@
 <script>
 import ItemModal from './ItemModal.vue';
 import ListItem from './ListItem.vue';
-import LoadingSpinner from './LoadingSpinner.vue';
 import FavoriteImages from './FavoriteImages.vue';
 import SkeletonLoader from './SkeletonLoader.vue';
+import { defineAsyncComponent } from 'vue';
+
+const LoadingSpinner = defineAsyncComponent(() =>
+  import('./LoadingSpinner.vue')
+);
 
 export default {
   /* eslint-disable */

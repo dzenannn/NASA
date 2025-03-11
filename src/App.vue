@@ -17,13 +17,13 @@ export default {
   components: { WelcomeScreen, ListWrapper, ThemeToggle },
   data() {
     return {
-      showWelcome: false,
+      showWelcome: true,
     };
   },
   created() {
     setTimeout(() => {
       this.showWelcome = false;
-    }, 4000);
+    }, 400000);
   },
 };
 </script>

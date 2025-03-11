@@ -36,20 +36,20 @@ export default {
 
 <style scoped>
 .welcomeImg {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: relative;
 }
 
 .welcomeImg > img {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 
 .title {
   font-size: 32px;
   position: absolute;
-  top: 20px;
+  top: 50px;
   left: 15%;
   font-weight: 500;
   color: #fff;
@@ -58,7 +58,7 @@ export default {
 .text {
   font-size: 20px;
   position: absolute;
-  top: 60px;
+  top: 90px;
   left: 15%;
   font-weight: 400;
   color: #fff;
