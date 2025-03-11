@@ -1,9 +1,11 @@
 <template>
-  <div class="welcomeImg">
-    <img :src="welcomeData.hdurl" />
+  <div class="welcomeScreen">
+    <div class="welcomeImg">
+      <img :src="welcomeData.hdurl" />
+    </div>
+    <div class="title">{{ welcomeData.title }}</div>
+    <div class="text">{{ welcomeData.explanation }}</div>
   </div>
-  <div class="title">{{ welcomeData.title }}</div>
-  <div class="text">{{ welcomeData.explanation }}</div>
 </template>
 
 <script>
@@ -35,6 +37,15 @@ export default {
 </script>
 
 <style scoped>
+.welcomeScreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
 .welcomeImg {
   width: 100%;
   height: 100%;

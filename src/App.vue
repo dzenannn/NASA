@@ -23,7 +23,7 @@ export default {
   created() {
     setTimeout(() => {
       this.showWelcome = false;
-    }, 400000);
+    }, 4000);
   },
 };
 </script>
