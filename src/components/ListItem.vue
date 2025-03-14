@@ -15,6 +15,7 @@
           Tags: {{ keyword }}
         </div>
       </div>
+      <button>Share on Social Media</button>
     </div>
   </div>
 </template>
