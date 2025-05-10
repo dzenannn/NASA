@@ -8,12 +8,6 @@
 
 > npm run serve
  <br />
- 🎯To-do functionalities:<br />
- <br />
- • Tags-based Search<br />
- • Share Button (share on social media)<br />
- • NASA News Feed<br />
- <br />
  Functionalities: <br /> Single item modal ✅ <br /> Infinite scroll ✅ <br /> Date-based sorting ✅ <br /> Year Filter ✅ <br /> Advanced Lazy Loading ✅ <br /> Dark/Light Theme ✅ <br /> Skeleton loading state ✅ <br /> Localized date and time ✅ <br/> Favorite images ✅
  <br/>
  <br/>
